@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>礼讲春节闽南语 - 互动插画</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
+        body { font-family: 'ZCOOL KuaiLe', cursive; background-color: #fce7e7; overflow: hidden; touch-action: manipulation; }
+        .page-container { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+        .illustration-card { width: 95%; max-width: 1000px; height: 70vh; aspect-ratio: auto; background: white; border: 8px solid #d9434e; border-radius: 2rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .illustration-card {
+                width: 98%;
+                aspect-ratio: auto;
+                border-width: 4px;
+                border-radius: 1rem;
+                height: 55vh;
+                min-height: 400px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            
+            .illustration-card img {
+                width: auto;
+                height: auto;
+                max-width: 90%;
+                max-height: 90%;
+                object-fit: contain;
+            }
+            
+            #story {
+                padding-top: 70px;
+            }
+            
+            #top-bar {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 100 !important;
+            }
+            
+            #story .flex-col {
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem !important;
+            }
+            
+            #top-bar h2 {
+                font-size: 1.2rem !important;
+            }
+            
+            #page-counter {
+                font-size: 1rem !important;
+            }
+            
+            #prevBtn, #nextBtn {
+                padding: 10px 20px;
+                font-size: 16px;
+                min-width: 100px;
+                min-height: 44px;
+            }
+            
+            .minnan-bubble {
+                padding: 0.2rem 0.6rem;
+                bottom: 0.8rem;
+                right: 0.8rem;
+            }
+            
+            .minnan-bubble #mText {
+                font-size: 0.9rem !important;
+            }
+            
+            .fullscreen-btn {
+                width: 44px;
+                height: 44px;
+                top: 0.8rem;
+                right: 0.8rem;
+            }
+            
+            .fullscreen-btn .material-symbols-outlined {
+                font-size: 20px;
+            }
+            
+            .scroll-button {
+                padding: 20px 30px;
+                font-size: 16px;
+                min-height: 44px;
+            }
+            
+            #quizContent h3 {
+                font-size: 1.2rem;
+            }
+            
+            #quizContent p {
+                font-size: 1rem;
+            }
+            
+            .quiz-option {
+                padding: 12px;
+                font-size: 0.9rem;
+                min-height: 44px;
+            }
+            
+            /* 活动介绍弹窗响应式 */
+            #activityModal {
+                padding: 20px;
+            }
+            
+            #activityModal .max-w-4xl {
+                max-width: 90vw;
+                max-height: 85vh;
+            }
+            
+            #activityModal h2 {
+                font-size: 1.8rem !important;
+            }
+            
+            #activityModal h3 {
+                font-size: 1.4rem !important;
+            }
+            
+            #activityModal .p-6 {
+                padding: 20px;
+            }
+            
+            #activityModal .md\:w-1\/3 {
+                width: 40%;
+            }
+            
+            /* 趣味世界主页面响应式 */
+            #worldMain .mt-8 {
+                margin-top: 20px;
+            }
+            
+            #worldMain .mb-4 {
+                margin-bottom: 15px;
+            }
+            
+            #worldMain .mt-\[-60px\] {
+                margin-top: -40px;
+            }
+            
+            #worldMain .space-y-8 {
+                gap: 20px;
+            }
+            
+            /* 加载界面灯笼图片响应式 */
+            #loader .z-4,
+            #loader .z-15 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+            }
+            #loader .z-4 img,
+            #loader .z-15 img {
+                max-width: 100%;
+                height: auto;
+                object-fit: contain;
+            }
+            
+            /* 触摸反馈效果 */
+            button {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            
+            button:active {
+                transform: scale(0.95);
+                transition: transform 0.1s;
+            }
+            
+            .quiz-option:active {
+                background-color: #f0f0f0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #top-bar {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 100 !important;
+            }
+            
+            #story {
+                overflow-x: hidden;
+                padding: 60px 10px 20px;
+                height: 100vh;
+                box-sizing: border-box;
+            }
+            
+            #story .illustration-card {
+                width: 100%;
+                max-width: 100%;
+                height: 50vh;
+                min-height: 300px;
+                aspect-ratio: auto;
+                border-width: 3px;
+                border-radius: 0.75rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            
+            #story .illustration-card img {
+                width: auto;
+                height: auto;
+                max-width: 90%;
+                max-height: 90%;
+                object-fit: contain;
+            }
+            
+            #story .mt-6 {
+                margin-top: 10px;
+            }
+            
+            #story .text-2xl {
+                font-size: 1rem;
+            }
+            
+            #story .max-w-xl {
+                max-width: 100%;
+            }
+            
+            #story .flex.justify-between {
+                gap: 8px;
+            }
+            
+            #prevBtn, #nextBtn {
+                padding: 8px 12px;
+                font-size: 14px;
+                min-width: 80px;
+            }
+            
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            #top-bar {
+                padding: 8px 0;
+            }
+            
+            #top-bar h2 {
+                font-size: 1rem !important;
+            }
+            
+            #prevBtn, #nextBtn {
+                padding: 8px 16px;
+                font-size: 14px;
+                min-width: 90px;
+                min-height: 44px;
+            }
+            
+            #sText {
+                font-size: 1.2rem !important;
+            }
+            
+            .minnan-bubble {
+                padding: 0.15rem 0.5rem;
+                bottom: 0.6rem;
+                right: 0.6rem;
+            }
+            
+            .minnan-bubble #mText {
+                font-size: 0.8rem !important;
+            }
+            
+            .fullscreen-btn {
+                width: 44px;
+                height: 44px;
+                top: 0.6rem;
+                right: 0.6rem;
+            }
+            
+            /* 手机端礼讲闽南语图片优化 */
+            #worldEntry img[src="static/imgs/礼讲闽南语.png"],
+            #worldMain img[src="static/imgs/礼讲闽南语.png"] {
+                max-height: 90vh;
+                min-height: 50vh;
+                width: auto;
+            }
+            
+            #worldEntry .mt-8,
+            #worldMain .mt-8 {
+                margin-top: 4px;
+                margin-bottom: 2px;
+            }
+            
+            .scroll-button {
+                padding: 15px 25px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+            
+            /* 活动介绍弹窗响应式 */
+            #activityModal {
+                padding: 8px;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            
+            #activityModal .max-w-4xl {
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+            
+            #activityModal h2 {
+                font-size: 1.3rem !important;
+            }
+            
+            #activityModal h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            #activityModal .p-4 {
+                padding: 12px;
+            }
+            
+            #activityModal .md\:w-1\/3 {
+                width: 100%;
+            }
+            
+            #activityModal .flex-col {
+                gap: 12px;
+            }
+            
+            #activityModal .rounded-xl {
+                border-radius: 12px;
+            }
+            
+            /* 小女孩对话框响应式 */
+            #activityModal .relative .absolute {
+                transform: translatex(0) translatey(-100%);
+            }
+            
+            #activityModal .relative .absolute .max-w-\[120px\] {
+                max-width: 100px;
+                padding: 8px;
+            }
+            
+            #activityModal .relative .absolute .max-w-\[120px\] p {
+                font-size: 0.8rem !important;
+            }
+            
+            /* 趣味世界主页面响应式 */
+            #worldMain .mt-8 {
+                margin-top: 15px;
+            }
+            
+            #worldMain .mb-4 {
+                margin-bottom: 10px;
+            }
+            
+            #worldMain .mt-\[-60px\] {
+                margin-top: -30px;
+            }
+            
+            #worldMain .space-y-8 {
+                gap: 15px;
+            }
+            
+            /* 音乐和返回按钮响应式 */
+            .music-button,
+            .back-button {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .music-button .material-symbols-outlined,
+            .back-button .material-symbols-outlined {
+                font-size: 20px;
+            }
+            
+            /* 加载界面灯笼图片响应式 */
+            #loader .z-4 img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+        }
+        
+        /* 横屏模式优化 */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .illustration-card {
+                aspect-ratio: auto;
+                max-height: 75vh;
+                width: auto;
+                max-width: 95%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            
+            .illustration-card img {
+                width: auto;
+                height: auto;
+                max-width: 90%;
+                max-height: 90%;
+                object-fit: contain;
+            }
+            
+            #story {
+                padding-top: 60px;
+                padding-bottom: 10px;
+            }
+            
+            #top-bar {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 100 !important;
+                padding: 5px 0;
+            }
+            
+            #top-bar h2 {
+                font-size: 1rem !important;
+            }
+            
+            #story {
+                padding-top: 55px !important;
+            }
+            
+            #story .mt-6 {
+                margin-top: 8px;
+            }
+            
+            #story .text-2xl {
+                font-size: 1rem;
+            }
+            
+            #prevBtn, #nextBtn {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .minnan-bubble {
+                padding: 0.15rem 0.5rem;
+                bottom: 0.6rem;
+                right: 0.6rem;
+            }
+            
+            .minnan-bubble #mText {
+                font-size: 0.8rem !important;
+            }
+            
+            .fullscreen-btn {
+                width: 36px;
+                height: 36px;
+                top: 0.6rem;
+                right: 0.6rem;
+            }
+            
+            /* 活动介绍弹窗横屏优化 */
+            #activityModal {
+                padding: 15px;
+            }
+            
+            #activityModal .max-w-4xl {
+                max-width: 80vw;
+                max-height: 90vh;
+            }
+            
+            #activityModal h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            #activityModal h3 {
+                font-size: 1.2rem !important;
+            }
+            
+            #activityModal .p-6 {
+                padding: 15px;
+            }
+            
+            #activityModal .md\:w-1\/3 {
+                width: 30%;
+            }
+            
+            /* 趣味世界主页面横屏优化 */
+            #worldMain .mt-8 {
+                margin-top: 15px;
+            }
+            
+            #worldMain .mb-4 {
+                margin-bottom: 10px;
+            }
+            
+            #worldMain .mt-\[-60px\] {
+                margin-top: -50px;
+            }
+            
+            #worldMain .space-y-8 {
+                gap: 15px;
+            }
+            
+            #worldMain .scroll-button {
+                padding: 15px 25px;
+                font-size: 14px;
+            }
+            
+            /* 加载界面灯笼图片横屏优化 */
+            #loader .z-4 {
+                height: 33.333%;
+            }
+            #loader .z-4 img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+        }
+        
+        /* 红包掉落特效 */
+        .red-packets {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .red-packet {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            background: linear-gradient(135deg, #d9434e 0%, #b71c1c 100%);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            animation: fall ease-in infinite;
+            transform-origin: center top;
+        }
+        
+        .red-packet::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 12px;
+            background: linear-gradient(135deg, #b71c1c 0%, #880e4f 100%);
+            border-radius: 6px 6px 0 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .red-packet::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 36px;
+            height: 12px;
+            background: linear-gradient(135deg, #b71c1c 0%, #880e4f 100%);
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .red-packet .packet-string {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 25px;
+            background: linear-gradient(to bottom, #8b4513 0%, #a0522d 100%);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        .red-packet .packet-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #ffeb3b;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 235, 59, 0.5);
+            width: 80%;
+            height: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: contentGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .red-packet .packet-decoration {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid rgba(255, 235, 59, 0.4);
+            border-radius: 4px;
+            background: linear-gradient(135deg, rgba(255, 235, 59, 0.1) 0%, rgba(255, 235, 59, 0) 100%);
+        }
+        
+        .red-packet .packet-corner {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 1px solid rgba(255, 235, 59, 0.6);
+            background: rgba(255, 235, 59, 0.1);
+        }
+        
+        .red-packet .packet-corner.top-left {
+            top: 4px;
+            left: 4px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .red-packet .packet-corner.top-right {
+            top: 4px;
+            right: 4px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .red-packet .packet-corner.bottom-left {
+            bottom: 4px;
+            left: 4px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .red-packet .packet-corner.bottom-right {
+            bottom: 4px;
+            right: 4px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(30px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 绳子摇摆动画 */
+        @keyframes stringSwing {
+            0%, 100% {
+                transform: translateX(-50%) rotate(-2deg);
+            }
+            50% {
+                transform: translateX(-50%) rotate(2deg);
+            }
+        }
+        
+        /* 内容发光动画 */
+        @keyframes contentGlow {
+            0% {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 235, 59, 0.5);
+            }
+            100% {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 235, 59, 0.8), 0 0 30px rgba(255, 235, 59, 0.5);
+            }
+        }
+        
+        /* Q弹落下动画 */
+        @keyframes bounce-in {
+            0% {
+                transform: translateY(-100%) scale(0.5);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(20%) scale(1.1);
+                opacity: 1;
+            }
+            80% {
+                transform: translateY(-10%) scale(0.95);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .animate-bounce-in {
+            animation: bounce-in 0.6s ease-out forwards;
+        }
+        
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .animate-bounce-slow {
+            animation: bounce-slow 2s ease-in-out infinite;
+        }
+        
+        /* 按钮发光动画 */
+        @keyframes button-glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 10px rgba(255, 235, 59, 0.3));
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.8)) drop-shadow(0 0 25px rgba(255, 235, 59, 0.5)) drop-shadow(0 0 35px rgba(255, 235, 59, 0.3));
+            }
+        }
+        
+        .animate-button-glow img {
+            animation: button-glow 2s ease-in-out infinite;
+        }
+        
+        /* 弹窗动画 */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slide-up {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out forwards;
+        }
+        
+        .animate-slide-up {
+            animation: slide-up 0.4s ease-out forwards;
+        }
+        
+        /* 多个红包的不同位置、大小和动画 - 背景特效 */
+        .red-packet:nth-child(1) {
+            left: 5%;
+            top: -60px;
+            width: 40px;
+            height: 50px;
+            animation-duration: 6s;
+            animation-delay: -1s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .red-packet:nth-child(2) {
+            left: 25%;
+            top: -100px;
+            width: 45px;
+            height: 55px;
+            animation-duration: 7s;
+            animation-delay: -3s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .red-packet:nth-child(3) {
+            left: 50%;
+            top: -80px;
+            width: 38px;
+            height: 48px;
+            animation-duration: 8s;
+            animation-delay: -5s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .red-packet:nth-child(4) {
+            left: 75%;
+            top: -120px;
+            width: 42px;
+            height: 52px;
+            animation-duration: 6s;
+            animation-delay: -2s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .red-packet:nth-child(5) {
+            left: 92%;
+            top: -70px;
+            width: 35px;
+            height: 45px;
+            animation-duration: 9s;
+            animation-delay: -4s;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+        
+        .hint-hand { position: absolute; font-size: 3rem; color: #fcd34d; pointer-events: none; animation: point-wiggle 1.5s infinite; z-index: 50; }
+        @keyframes point-wiggle { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(10px, 10px) scale(1.1); } }
+        .fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .loading-progress { 
+            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #d9434e, #ff6b6b);
+            animation: progressGlow 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes progressGlow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(217, 67, 78, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(217, 67, 78, 0.8), 0 0 30px rgba(255, 107, 107, 0.5);
+            }
+        }
+        .minnan-bubble { background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(217, 67, 78, 0.2); border-radius: 0.8rem; padding: 0.3rem 0.8rem; position: absolute; bottom: 1rem; right: 1rem; box-shadow: 3px 3px 0 rgba(217, 67, 78, 0.2); z-index: 20; transition: all 0.3s ease; }
+        
+        .minnan-bubble:hover {
+            background: #fff;
+            border: 2px solid #d9434e;
+            box-shadow: 3px 3px 0 #d9434e;
+        }
+        
+        .minnan-bubble #mText {
+            font-size: 1rem;
+            color: rgba(217, 67, 78, 0.5);
+            transition: color 0.3s ease;
+        }
+        
+        .minnan-bubble:hover #mText {
+            color: #d9434e;
+        }
+        
+        .minnan-bubble .material-symbols-outlined {
+            font-size: 1.2rem;
+            color: rgba(217, 67, 78, 0.5);
+            transition: color 0.3s ease;
+        }
+        
+        .minnan-bubble:hover .material-symbols-outlined {
+            color: #d9434e;
+        }
+        
+        /* 全屏按钮样式 */
+        .fullscreen-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(217, 67, 78, 0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 21;
+            transition: all 0.3s ease;
+        }
+        
+        .fullscreen-btn:hover {
+            background: #fff;
+            border: 2px solid #d9434e;
+        }
+        
+        .fullscreen-btn .material-symbols-outlined {
+            color: rgba(217, 67, 78, 0.5);
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+        
+        .fullscreen-btn:hover .material-symbols-outlined {
+            color: #d9434e;
+        }
+        
+        /* 全屏模式下的容器样式 */
+        :fullscreen {
+            background-color: white;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :fullscreen .illustration-card {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :fullscreen .illustration-card #pImg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        :-webkit-full-screen {
+            background-color: white;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :-webkit-full-screen .illustration-card {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :-webkit-full-screen .illustration-card #pImg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        :-ms-fullscreen {
+            background-color: white;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :-ms-fullscreen .illustration-card {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        :-ms-fullscreen .illustration-card #pImg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        /* 液态玻璃特效 */
+        .bg-loader-pattern {
+            background: var(--loader-bg, linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 1;
+        }
+        
+        /* 灯笼样式 */
+        .lantern {
+            width: 80px;
+            height: 120px;
+            background: #d9434e;
+            border-radius: 50% 50% 10% 10%;
+            position: absolute;
+            animation: lanternSwing 3s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+        
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 40px;
+            background: #d9434e;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .lantern::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: #d9434e;
+            border-radius: 5px;
+        }
+        
+        .lantern .lantern-light {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 60px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            animation: lanternGlow 2s ease-in-out infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lantern .lantern-icon {
+            font-size: 24px;
+            color: #d9434e;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 灯笼动画 */
+        @keyframes lanternSwing {
+            0% {
+                transform: rotate(-5deg);
+            }
+            100% {
+                transform: rotate(5deg);
+            }
+        }
+        
+        @keyframes lanternGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(255, 235, 59, 1);
+            }
+        }
+        
+        /* 文字文艺特效 */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.05);
+            }
+        }
+        
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 2px 2px 4px rgba(217, 67, 78, 0.5);
+            }
+            50% {
+                text-shadow: 4px 4px 8px rgba(217, 67, 78, 0.8), 0 0 20px rgba(255, 235, 59, 0.5);
+            }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite, textGlow 4s ease-in-out infinite;
+        }
+        
+        /* 顶部目录栏样式 - Cartoon风格 */
+        #top-bar {
+            background: #fff3f3;
+            border-b: 6px solid #d9434e;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        
+        #top-bar h2 {
+            font-family: 'ZCOOL KuaiLe', cursive;
+            text-shadow: 2px 2px 0 rgba(217, 67, 78, 0.3);
+        }
+        
+        #top-bar #page-counter {
+            background: #ffeb3b;
+            padding: 2px 8px;
+            border-radius: 20px;
+            border: 2px solid #d9434e;
+        }
+        
+        /* 按钮样式 - Cartoon风格 */
+        #prevBtn, #nextBtn {
+            background: linear-gradient(135deg, #d9434e, #ff6b6b);
+            color: white;
+            border: 4px solid #fff;
+            border-radius: 50px;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 0 rgba(217, 67, 78, 0.5);
+            position: relative;
+        }
+        
+        #prevBtn:hover, #nextBtn:hover {
+            background: linear-gradient(135deg, #b71c1c, #ff5252);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 0 rgba(217, 67, 78, 0.5);
+        }
+        
+        #prevBtn:active, #nextBtn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(217, 67, 78, 0.5);
+        }
+        
+        /* 禁用状态样式 */
+        #prevBtn:disabled {
+            background: linear-gradient(135deg, #cccccc, #e0e0e0);
+            cursor: not-allowed;
+            border-color: #999999;
+            box-shadow: 0 6px 0 rgba(153, 153, 153, 0.5);
+        }
+        
+        #prevBtn:disabled:hover {
+            background: linear-gradient(135deg, #cccccc, #e0e0e0);
+            transform: none;
+            box-shadow: 0 6px 0 rgba(153, 153, 153, 0.5);
+        }
+        
+        #prevBtn:disabled:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(153, 153, 153, 0.5);
+        }
+        
+        /* 卡通风格返回按钮 */
+        .back-button {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #fff;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d9434e, #ff6b6b);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 4px 0 rgba(139, 69, 19, 0.3),
+                0 0 10px rgba(217, 67, 78, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 音乐控制按钮 */
+        .music-button {
+            position: relative;
+            border-radius: 50%;
+            background: transparent;
+            color: #d9434e;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .music-button:hover {
+            background: rgba(217, 67, 78, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .music-button:active {
+            transform: scale(0.95);
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #b71c1c, #ff5252);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow:
+                0 6px 0 rgba(139, 69, 19, 0.3),
+                0 0 15px rgba(217, 67, 78, 0.7);
+        }
+        
+        .back-button:active {
+            transform: translateY(2px) scale(0.95);
+            box-shadow:
+                0 2px 0 rgba(139, 69, 19, 0.3),
+                0 0 5px rgba(217, 67, 78, 0.5);
+        }
+        
+        /* 优化版卷轴样式按钮 */
+        .scroll-button {
+            position: relative;
+            padding: 20px 35px;
+            border: 4px solid #d9434e;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f5e6d3, #e8d0b3);
+            color: #d9434e;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow:
+                0 6px 0 rgba(217, 67, 78, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(217, 67, 78, 0.3);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+            max-width: 300px;
+            width: 100%;
+        }
+        
+        .scroll-button::before,
+        .scroll-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 15px;
+            background: linear-gradient(90deg, #d9434e, #b8323c);
+            border-radius: 4px;
+        }
+        
+        .scroll-button::before {
+            left: 10px;
+            box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-button::after {
+            right: 10px;
+            box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .scroll-button:hover {
+            background: linear-gradient(135deg, #e8d0b3, #d9b693);
+            transform: translateY(-4px);
+            box-shadow:
+                0 8px 0 rgba(217, 67, 78, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(217, 67, 78, 0.3);
+        }
+        
+        .scroll-button:hover::before,
+        .scroll-button:hover::after {
+            background: linear-gradient(90deg, #b8323c, #d9434e);
+        }
+        
+        .scroll-button:active {
+            transform: translateY(2px);
+            box-shadow:
+                0 4px 0 rgba(217, 67, 78, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.5),
+                inset 0 -2px 4px rgba(217, 67, 78, 0.3);
+        }
+        
+        .scroll-button span {
+            position: relative;
+            z-index: 1;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-[#fce7e7]">
+    <div class="page-container" id="app">
+        <!-- 顶部目录栏 -->
+        <div id="top-bar" class="hidden fixed top-0 left-0 right-0 z-50 bg-white border-b-4 border-[#d9434e] shadow-lg">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <!-- 音乐控制按钮 -->
+                    <button id="storyMusicBtn" class="music-button w-10 h-10 rounded-full bg-transparent border-2 border-[#d9434e] flex items-center justify-center hover:bg-[#d9434e] hover:bg-opacity-20 transition-all duration-300">
+                        <span class="material-symbols-outlined text-[#d9434e]">volume_up</span>
+                    </button>
+                    <!-- 返回按钮 -->
+                    <button id="backBtn" class="back-button bg-[#d9434e] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 shadow-md">
+                        <span class="material-symbols-outlined">arrow_back</span>
+                    </button>
+                    <h2 class="text-2xl font-bold text-[#d9434e]">礼讲春节闽南语</h2>
+                </div>
+                <div class="text-xl font-bold text-[#d9434e]">第 <span id="page-counter">1</span> / 33 页</div>
+            </div>
+        </div>
+        
+        <!-- Loader -->
+        <div class="relative flex flex-col items-center justify-center w-full h-full" id="loader">
+            <!-- 烟花背景图（置底） -->
+            <div class="absolute inset-0 pointer-events-none z-0">
+                <img src="static/imgs/烟花.jpg" alt="烟花背景" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- 灰色玻璃层（更灰） -->
+            <div class="absolute inset-0 bg-gray-500 opacity-70 z-1"></div>
+            
+            <!-- 液态玻璃背景 -->
+            <div class="absolute inset-0 bg-loader-pattern opacity-10 z-3"></div>
+            
+            <!-- 红包掉落特效（放在灯笼和灰色玻璃背景之间，z-2） -->
+            <div class="red-packets z-2">
+                <div class="red-packet">
+                    <div class="packet-string"></div>
+                    <div class="packet-content">福</div>
+                    <div class="packet-decoration"></div>
+                    <div class="packet-corner top-left"></div>
+                    <div class="packet-corner top-right"></div>
+                    <div class="packet-corner bottom-left"></div>
+                    <div class="packet-corner bottom-right"></div>
+                </div>
+                <div class="red-packet">
+                    <div class="packet-string"></div>
+                    <div class="packet-content">利是</div>
+                    <div class="packet-decoration"></div>
+                    <div class="packet-corner top-left"></div>
+                    <div class="packet-corner top-right"></div>
+                    <div class="packet-corner bottom-left"></div>
+                    <div class="packet-corner bottom-right"></div>
+                </div>
+                <div class="red-packet">
+                    <div class="packet-string"></div>
+                    <div class="packet-content">红包</div>
+                    <div class="packet-decoration"></div>
+                    <div class="packet-corner top-left"></div>
+                    <div class="packet-corner top-right"></div>
+                    <div class="packet-corner bottom-left"></div>
+                    <div class="packet-corner bottom-right"></div>
+                </div>
+                <div class="red-packet">
+                    <div class="packet-string"></div>
+                    <div class="packet-content">大吉</div>
+                    <div class="packet-decoration"></div>
+                    <div class="packet-corner top-left"></div>
+                    <div class="packet-corner top-right"></div>
+                    <div class="packet-corner bottom-left"></div>
+                    <div class="packet-corner bottom-right"></div>
+                </div>
+                <div class="red-packet">
+                    <div class="packet-string"></div>
+                    <div class="packet-content">如意</div>
+                    <div class="packet-decoration"></div>
+                    <div class="packet-corner top-left"></div>
+                    <div class="packet-corner top-right"></div>
+                    <div class="packet-corner bottom-left"></div>
+                    <div class="packet-corner bottom-right"></div>
+                </div>
+            </div>
+            
+            <!-- 灯笼图片（置顶，z-15） -->
+            <div class="absolute top-0 left-0 right-0 pointer-events-none z-15">
+                <img src="static/imgs/灯笼.png" alt="灯笼" class="w-full h-auto object-contain">
+            </div>
+            
+            <!-- 加载内容 -->
+            <div class="relative z-10 text-center">
+               <!-- <h1 class="text-6xl text-[#d9434e] mb-8 font-bold animate-float">礼讲春节闽南语</h1> -->
+                <div class="flex flex-col items-center w-full mb-6">
+                    <div class="flex justify-center items-center w-full mb-2">
+                        <span id="progressText" class="text-xl font-bold text-[#d9434e]">1%</span>
+                    </div>
+                    <div class="w-64 h-4 bg-gray-200 rounded-full border-2 border-[#d9434e] overflow-hidden relative">
+                        <div id="progressBar" class="h-full bg-[#d9434e] loading-progress" style="width: 0%"></div>
+                    </div>
+                </div>
+                <button id="enterWorldBtn" class="hidden bg-[#d9434e] text-white px-10 py-3 rounded-full text-xl hover:bg-red-700 transition-all duration-300 shadow-lg" onclick="enterWorld()">进入趣味世界</button>
+            </div>
+        </div>
+        
+        <!-- World Entry -->
+        <div id="worldEntry" class="hidden relative w-full h-full">
+            <!-- 烟花背景图 -->
+            <div class="absolute inset-0 z-0">
+                <img src="static/imgs/烟花.jpg" alt="烟花背景" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- 音乐控制按钮 -->
+            <div class="absolute top-4 left-4 z-10">
+                <button id="musicBtn" class="music-button w-12 h-12 rounded-full bg-transparent border-2 border-[#d9434e] flex items-center justify-center hover:bg-[#d9434e] hover:bg-opacity-20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-[#d9434e]">volume_up</span>
+                </button>
+            </div>
+            <!-- 返回按钮 -->
+            <div class="absolute top-4 right-4 z-10">
+                <button id="worldBackBtn" class="back-button bg-[#d9434e] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 shadow-md">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+            </div>
+            
+            <!-- 内容容器 -->
+            <div class="absolute inset-0 flex flex-col items-center z-1">
+                <!-- 主题图片 - 放在顶部 -->
+                <div class="mt-8 mb-4">
+                    <img src="static/imgs/礼讲闽南语.png" alt="礼讲闽南语" class="max-w-full h-auto max-h-[70vh] animate-bounce-in">
+                </div>
+                
+                <!-- 中间按钮 -->
+                <div class="mt-auto mb-16">
+                    <button id="openDoorBtn" class="bg-transparent border-none animate-button-glow" onclick="openWorldMain()">
+                        <img src="static/imgs/开门迎福.png" alt="开门迎福" class="w-full h-auto max-w-xs hover:scale-105 transition-transform duration-300">
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 活动介绍弹窗 -->
+        <div id="activityModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-black bg-opacity-50 animate-fade-in"></div>
+            <div class="relative bg-gradient-to-br from-red-100 to-red-200 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden animate-slide-up">
+                <!-- 弹窗头部 -->
+                <div class="bg-gradient-to-r from-red-600 to-red-800 px-6 py-4 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">活动介绍</h2>
+                    <button id="closeModalBtn" class="text-white text-2xl hover:text-yellow-300 transition-colors duration-300">
+                        ×
+                    </button>
+                </div>
+                
+                <!-- 弹窗内容 -->
+                <div class="p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6">
+                    <!-- 移动端：文字在下(order-2) | 桌面端：文字在左(order-1) -->
+                    <div class="order-2 md:order-1 flex-1 bg-white bg-opacity-80 rounded-xl p-4 max-h-[40vh] md:max-h-[60vh] overflow-y-auto">
+                        <h3 class="text-lg md:text-xl font-bold text-red-800 mb-3 md:mb-4">礼讲闽南语 - 春节特别活动</h3>
+                        <p class="text-gray-800 mb-3 md:mb-4 text-sm md:text-base">
+                            欢迎参加「礼讲闽南语」春节特别活动！这是一个专为推广闽南语文化而设计的互动体验，通过有趣的绘本故事和知识问答，让大家在欢乐的氛围中学习闽南语。
+                        </p>
+                        <p class="text-gray-800 mb-3 md:mb-4 text-sm md:text-base">
+                            活动内容包括：
+                        </p>
+                        <ul class="list-disc list-inside text-gray-800 mb-3 md:mb-4 space-y-1 md:space-y-2 text-sm md:text-base">
+                            <li>跟着绘本游春节闽南 - 通过精美的插画和简单的闽南语对话，了解闽南地区的春节习俗</li>
+                            <li>趣味答题 - 测试你对闽南语的了解，学习常用的闽南语祝福语和表达方式</li>
+                            <li>红包掉落特效 - 感受春节的喜庆氛围，体验传统红包文化</li>
+                        </ul>
+                        <p class="text-gray-800 mb-3 md:mb-4 text-sm md:text-base">
+                            希望通过这次活动，能让更多人了解和喜爱闽南语文化，感受传统春节的魅力！
+                        </p>
+                        <p class="text-gray-800 font-bold text-sm md:text-base">
+                            祝大家春节快乐，万事如意！
+                        </p>
+                    </div>
+                    
+                    <!-- 移动端：小女孩在上(order-1) | 桌面端：小女孩在右(order-2) -->
+                    <div class="order-1 md:order-2 md:w-1/2 flex items-center justify-center relative">
+                        <img src="static/imgs/小女孩阿梅.png" alt="小女孩" class="max-w-full h-auto max-h-40 md:max-h-120">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 故事完成弹窗 -->
+        <div id="storyCompleteModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="absolute inset-0 bg-black bg-opacity-60 animate-fade-in" id="storyCompleteOverlay"></div>
+            <div class="relative bg-gradient-to-br from-yellow-50 to-red-100 rounded-3xl shadow-2xl max-w-md w-full overflow-hidden animate-bounce-in transform scale-100">
+                <!-- 装饰边框 -->
+                <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400"></div>
+                
+                <!-- 顶部装饰 -->
+                <div class="flex justify-center -mt-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-red-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                        <span class="material-symbols-outlined text-white text-4xl">celebration</span>
+                    </div>
+                </div>
+                
+                <!-- 标题 -->
+                <div class="px-6 pt-8 pb-4 text-center">
+                    <h2 class="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-yellow-600 mb-2">
+                        恭喜完成！🎉
+                    </h2>
+                    <p class="text-lg font-medium text-gray-700">
+                        故事讲完啦！
+                    </p>
+                </div>
+                
+                <!-- 主内容 -->
+                <div class="px-6 pb-4">
+                    <div class="bg-white bg-opacity-70 rounded-2xl p-5 text-center shadow-inner">
+                        <p class="text-xl md:text-2xl font-bold text-red-600 mb-3">
+                            恭喜你学会了春节闽南语！
+                        </p>
+                        <div class="flex justify-center items-center gap-2 mb-3">
+                            <span class="text-3xl">🎊</span>
+                        </div>
+                        <p class="text-gray-600 text-sm md:text-base">
+                            你已经掌握了闽南地区的春节习俗<br>和常用祝福语，真棒！
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 小女孩祝福 -->
+                <div class="px-6 pb-4 flex justify-center">
+                    <div class="flex items-end gap-3">
+                        <img src="static/imgs/小女孩阿梅.png" alt="阿梅" class="w-20 h-auto animate-bounce-slow">
+                        <div class="bg-white rounded-2xl p-3 shadow-md relative">
+                            <div class="absolute -left-2 bottom-3 w-4 h-4 bg-white transform rotate-45"></div>
+                            <p class="text-sm text-gray-700">继续加油哦！💪</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 按钮 -->
+                <div class="px-6 pb-6 flex flex-col gap-3">
+                    <button id="storyCompleteRestartBtn" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white font-bold py-3 px-6 rounded-xl hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        🔄 再学一遍
+                    </button>
+                    <button id="storyCompleteCloseBtn" class="w-full bg-white border-2 border-red-300 text-red-600 font-bold py-3 px-6 rounded-xl hover:bg-red-50 transition-all duration-300">
+                        返回首页
+                    </button>
+                </div>
+                
+                <!-- 底部装饰 -->
+                <div class="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-yellow-400"></div>
+            </div>
+        </div>
+        
+        <!-- 趣味世界主页面 -->
+        <div id="worldMain" class="hidden flex flex-col items-center justify-center w-full h-full px-4 relative">
+            <!-- 背景图片 -->
+            <div class="absolute inset-0 z-0">
+                <img src="static/imgs/烟花.jpg" alt="背景" class="w-full h-full object-cover">
+            </div>
+            <!-- 灰色玻璃背景 -->
+            <div class="absolute inset-0 bg-gray-500 opacity-70 z-1"></div>
+            <!-- 音乐控制按钮 -->
+            <div class="absolute top-4 left-4 z-10">
+                <button id="worldMusicBtn" class="music-button w-12 h-12 rounded-full bg-transparent border-2 border-[#d9434e] flex items-center justify-center hover:bg-[#d9434e] hover:bg-opacity-20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-[#d9434e]">volume_up</span>
+                </button>
+            </div>
+            <!-- 返回按钮 -->
+            <div class="absolute top-4 right-4 z-10">
+                <button id="worldMainBackBtn" class="back-button bg-[#d9434e] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 shadow-md">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+            </div>
+            <div class="mt-8 mb-4 z-2">
+                <img src="static/imgs/礼讲闽南语.png" alt="礼讲闽南语" class="max-w-full h-auto max-h-[70vh] animate-bounce-in">
+            </div>
+            <div class="flex flex-col items-center space-y-8 mt-[-60px] z-2">
+                <button id="startBtn" class="scroll-button bg-[#f5e6d3] text-[#d9434e] px-12 py-4 rounded-lg hover:bg-[#e8d0b3] transition-all duration-300 shadow-lg" onclick="start()">
+                    <span class="text-xl font-bold">跟着绘本游春节闽南</span>
+                </button>
+                <button id="quizBtn" class="scroll-button bg-[#f5e6d3] text-[#d9434e] px-12 py-4 rounded-lg hover:bg-[#e8d0b3] transition-all duration-300 shadow-lg" onclick="openQuiz()">
+                    <span class="text-xl font-bold">趣味答题</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quiz Page -->
+        <div id="quizPage" class="hidden flex flex-col items-center justify-center w-full h-full px-4 relative">
+            <!-- 背景图片 -->
+            <div class="absolute inset-0 z-0">
+                <img src="static/imgs/烟花.jpg" alt="背景" class="w-full h-full object-cover">
+            </div>
+            <!-- 灰色玻璃背景 -->
+            <div class="absolute inset-0 bg-gray-500 opacity-70 z-1"></div>
+            <!-- 音乐控制按钮 -->
+            <div class="absolute top-4 left-4 z-10">
+                <button id="quizMusicBtn" class="music-button w-12 h-12 rounded-full bg-transparent border-2 border-[#d9434e] flex items-center justify-center hover:bg-[#d9434e] hover:bg-opacity-20 transition-all duration-300">
+                    <span class="material-symbols-outlined text-[#d9434e]">volume_up</span>
+                </button>
+            </div>
+            <!-- 返回按钮 -->
+            <div class="absolute top-4 right-4 z-10">
+                <button id="quizBackBtn" class="back-button bg-[#d9434e] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition-all duration-300 shadow-md">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+            </div>
+            <div class="bg-white rounded-xl p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-lg z-10 relative">
+                <div class="flex justify-center mb-6">
+                    <h2 class="text-2xl font-bold text-[#d9434e]">趣味答题</h2>
+                </div>
+                <div id="quizContent">
+                    <!-- Quiz questions will be dynamically inserted here -->
+                </div>
+                <div id="quizResult" class="hidden mt-6 p-4 rounded-lg">
+                    <h3 id="resultTitle" class="text-xl font-bold mb-2"></h3>
+                    <p id="resultMessage" class="text-lg"></p>
+                    <button id="nextQuestionBtn" class="mt-4 bg-[#d9434e] text-white px-6 py-2 rounded-full hover:bg-red-700 transition-all duration-300">下一题</button>
+                </div>
+                <div id="quizComplete" class="hidden mt-6 p-4 rounded-lg">
+                    <h3 class="text-xl font-bold text-[#d9434e] mb-2">答题完成！</h3>
+                    <p id="finalScore" class="text-lg mb-4"></p>
+                    <button id="quizCompleteBackBtn" class="bg-[#d9434e] text-white px-6 py-2 rounded-full hover:bg-red-700 transition-all duration-300">返回</button>
+                </div>
+            </div>
+        </div>
+        <!-- Story -->
+        <div id="story" class="hidden flex flex-col items-center w-full px-4 pt-20">
+            <div class="illustration-card fade-in">
+                <img id="pImg" src=""/>
+                <div id="bubble" class="minnan-bubble">
+                    <span id="mText" class="text-xl font-bold text-[#d9434e]"></span>
+                    <span class="material-symbols-outlined align-middle ml-1">volume_up</span>
+                </div>
+                <button id="fullscreen-btn" class="fullscreen-btn">
+                    <span class="material-symbols-outlined">fullscreen</span>
+                </button>
+            </div>
+            <div class="mt-6 text-center">
+                <p id="sText" class="text-2xl font-medium max-w-xl"></p>
+            </div>
+            <div class="flex justify-between w-full max-w-2xl mt-6">
+                <button id="prevBtn" class="bg-[#d9434e] text-white px-6 py-3 rounded-full text-xl hover:bg-red-700 transition-all duration-300 shadow-lg">
+                    上一页
+                </button>
+                <button id="nextBtn" class="bg-[#d9434e] text-white px-6 py-3 rounded-full text-xl hover:bg-red-700 transition-all duration-300 shadow-lg">
+                    下一页
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const pages = [
+            { img: "终稿/1_compressed.jpeg", min: "Lāi-o̍h Mîn-lâm-gú!", h: {x:50, y:50} },
+            { img: "终稿/2(可翻页)_compressed.jpeg", min: "Tńg-khì lāu-ka!", h: {x:80, y:40} },
+            { img: "终稿/3_compressed.jpeg", min: "Âng-chng-chhù!", h: {x:30, y:60} },
+            { img: "终稿/4_compressed.jpeg", min: "A-Góng!", h: {x:50, y:40} },
+            { img: "终稿/5_compressed.jpeg", min: "A-Má!", h: {x:60, y:50} },
+            { img: "终稿/5(可翻页)_compressed.jpeg", min: "A-Má!", h: {x:60, y:50} },
+            { img: "终稿/6_compressed.jpeg", min: "Phah-sàu!", h: {x:40, y:80} },
+            { img: "终稿/6(可翻页)_compressed.jpeg", min: "Phah-sàu!", h: {x:40, y:80} },
+            { img: "终稿/7_compressed.jpeg", min: "Thiat-tian-liân!", h: {x:70, y:30} },
+            { img: "终稿/7(可翻页)_compressed.jpeg", min: "Thiat-tian-liân!", h: {x:70, y:30} },
+            { img: "终稿/8_compressed.jpeg", min: "Hok-khì kàu-lo̍h!", h: {x:50, y:50} },
+            { img: "终稿/9_compressed.jpeg", min: "Bé-nî-hòe!", h: {x:20, y:70} },
+            { img: "终稿/10_compressed.jpeg", min: "Âng-lâi!", h: {x:60, y:60} },
+            { img: "终稿/11_compressed.jpeg", min: "Chhài-thâu!", h: {x:40, y:50} },
+            { img: "终稿/12_compressed.jpeg", min: "Nî-nî-ū-î!", h: {x:50, y:30} },
+            { img: "终稿/13_compressed.jpeg", min: "Pōo-pōo koân-chhèng!", h: {x:70, y:70} },
+            { img: "终稿/14_compressed.jpeg", min: "Thoân-oân-pn̄g!", h: {x:50, y:50} },
+            { img: "终稿/14(可翻页)_compressed.jpeg", min: "Thoân-oân-pn̄g!", h: {x:50, y:50} },
+            { img: "终稿/15_compressed.jpeg", min: "Sin-thé kiān-khong!", h: {x:40, y:40} },
+            { img: "终稿/16_compressed.jpeg", min: "Âng-pau!", h: {x:60, y:60} },
+            { img: "终稿/16(可翻页)_compressed.jpeg", min: "Âng-pau!", h: {x:60, y:60} },
+            { img: "终稿/17_compressed.jpeg", min: "Kám-siā!", h: {x:50, y:80} },
+            { img: "终稿/17(可翻页)_compressed.jpeg", min: "Kám-siā!", h: {x:50, y:80} },
+            { img: "终稿/18_compressed.jpeg", min: "Chhiōng-sin-sa!", h: {x:30, y:40} },
+            { img: "终稿/18(可翻页)_compressed.jpeg", min: "Chhiōng-sin-sa!", h: {x:30, y:40} },
+            { img: "终稿/19_compressed.jpeg", min: "Pài-nî!", h: {x:50, y:50} },
+            { img: "终稿/20_compressed.jpeg", min: "Sin-nî khuài-lo̍k!", h: {x:80, y:20} },
+            { img: "终稿/21_compressed.jpeg", min: "Kiong-hí hoat-châi!", h: {x:50, y:50} },
+            { img: "终稿/22_compressed.jpeg", min: "Bān-sū jû-ì!", h: {x:20, y:50} },
+            { img: "终稿/23_compressed.jpeg", min: "Kian-kiat-kiat!", h: {x:50, y:40} },
+            { img: "终稿/24_compressed.jpeg", min: "Chiah-ti-tê!", h: {x:60, y:70} },
+            { img: "终稿/24(可翻页)_compressed.jpeg", min: "Chiah-ti-tê!", h: {x:60, y:70} },
+            { img: "终稿/25_compressed.jpeg", min: "Thô-dāu!", h: {x:40, y:60} },
+        ];
+
+        let cur = 0;
+        let progress = 1;
+        const loaderInt = setInterval(() => {
+            progress += 1;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = progress + '%';
+            if (progress >= 100) {
+                clearInterval(loaderInt);
+                document.getElementById('enterWorldBtn').classList.remove('hidden');
+            }
+        }, 30);
+
+        function start() {
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('worldEntry').classList.add('hidden');
+            document.getElementById('worldMain').classList.add('hidden');
+            document.getElementById('story').classList.remove('hidden');
+            document.getElementById('top-bar').classList.remove('hidden');
+            // 重置绘本页面到第一页
+            cur = 0;
+            update();
+            
+            // 添加上下页按钮事件监听
+            document.getElementById('prevBtn').addEventListener('click', prev);
+            document.getElementById('nextBtn').addEventListener('click', next);
+            
+            // 添加全屏按钮事件监听
+            document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+            
+            // 添加键盘导航
+            document.addEventListener('keydown', handleKeyboard);
+            
+            // 移除非全屏模式下的触摸滑动功能，只在全屏模式下启用
+            
+            // 添加鼠标点击导航
+            document.getElementById('pImg').addEventListener('click', next);
+            
+            // 添加返回按钮事件监听
+            document.getElementById('backBtn').addEventListener('click', function() {
+                document.getElementById('story').classList.add('hidden');
+                document.getElementById('top-bar').classList.add('hidden');
+                document.getElementById('worldMain').classList.remove('hidden');
+            });
+            
+            // 音乐已经在enterWorld()函数中初始化
+        }
+        
+        // 全屏功能
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                // 创建专门的全屏容器
+                const fullscreenContainer = document.createElement('div');
+                fullscreenContainer.id = 'fullscreen-container';
+                fullscreenContainer.style.position = 'fixed';
+                fullscreenContainer.style.top = '0';
+                fullscreenContainer.style.left = '0';
+                fullscreenContainer.style.width = '100vw';
+                fullscreenContainer.style.height = '100vh';
+                fullscreenContainer.style.backgroundColor = 'white';
+                fullscreenContainer.style.display = 'flex';
+                fullscreenContainer.style.alignItems = 'center';
+                fullscreenContainer.style.justifyContent = 'center';
+                fullscreenContainer.style.zIndex = '9999';
+                
+                // 创建全屏图片
+                const fullscreenImg = document.createElement('img');
+                fullscreenImg.src = document.getElementById('pImg').src;
+                fullscreenImg.style.maxWidth = '95%';
+                fullscreenImg.style.maxHeight = '95%';
+                fullscreenImg.style.objectFit = 'contain';
+                fullscreenImg.style.border = '4px solid #d9434e';
+                fullscreenImg.style.boxSizing = 'border-box';
+                
+                // 添加图片到容器
+                fullscreenContainer.appendChild(fullscreenImg);
+                
+                // 创建全屏按钮（右上角）
+                const fullscreenBtn = document.createElement('button');
+                fullscreenBtn.innerHTML = '<span class="material-symbols-outlined">fullscreen_exit</span>';
+                fullscreenBtn.style.position = 'absolute';
+                fullscreenBtn.style.top = '20px';
+                fullscreenBtn.style.right = '20px';
+                fullscreenBtn.style.width = '40px';
+                fullscreenBtn.style.height = '40px';
+                fullscreenBtn.style.borderRadius = '50%';
+                fullscreenBtn.style.border = '2px solid rgba(217, 67, 78, 0.2)';
+                fullscreenBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                fullscreenBtn.style.display = 'flex';
+                fullscreenBtn.style.alignItems = 'center';
+                fullscreenBtn.style.justifyContent = 'center';
+                fullscreenBtn.style.cursor = 'pointer';
+                fullscreenBtn.style.zIndex = '10000';
+                fullscreenBtn.style.transition = 'all 0.3s ease';
+                
+                // 设置图标样式
+                const fullscreenIcon = fullscreenBtn.querySelector('.material-symbols-outlined');
+                fullscreenIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                fullscreenIcon.style.fontSize = '20px';
+                fullscreenIcon.style.transition = 'color 0.3s ease';
+                
+                // 鼠标悬停效果
+                fullscreenBtn.addEventListener('mouseenter', function() {
+                    fullscreenBtn.style.backgroundColor = 'white';
+                    fullscreenBtn.style.borderColor = '#d9434e';
+                    fullscreenIcon.style.color = '#d9434e';
+                });
+                
+                fullscreenBtn.addEventListener('mouseleave', function() {
+                    fullscreenBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    fullscreenBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                    fullscreenIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                });
+                
+                // 触摸事件效果（手机端）
+                fullscreenBtn.addEventListener('touchstart', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    fullscreenBtn.style.backgroundColor = 'white';
+                    fullscreenBtn.style.borderColor = '#d9434e';
+                    fullscreenIcon.style.color = '#d9434e';
+                });
+                
+                // 触摸事件退出全屏（手机端）
+                fullscreenBtn.addEventListener('touchend', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    fullscreenBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    fullscreenBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                    fullscreenIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                    
+                    // 退出全屏
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitCancelFullScreen) {
+                        document.webkitCancelFullScreen();
+                    }
+                });
+                
+                // 点击退出全屏
+                fullscreenBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitCancelFullScreen) {
+                        document.webkitCancelFullScreen();
+                    }
+                });
+                
+                // 创建声音按钮（右下角）
+                const soundBtn = document.createElement('button');
+                soundBtn.innerHTML = '<span>' + document.getElementById('mText').innerText + '</span><span class="material-symbols-outlined ml-1">volume_up</span>';
+                soundBtn.style.position = 'absolute';
+                soundBtn.style.bottom = '20px';
+                soundBtn.style.right = '20px';
+                soundBtn.style.padding = '8px 16px';
+                soundBtn.style.borderRadius = '16px';
+                soundBtn.style.border = '2px solid rgba(217, 67, 78, 0.2)';
+                soundBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                soundBtn.style.cursor = 'pointer';
+                soundBtn.style.zIndex = '10000';
+                soundBtn.style.transition = 'all 0.3s ease';
+                
+                // 设置文字和图标样式
+                const soundText = soundBtn.querySelector('span:first-child');
+                soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                soundText.style.transition = 'color 0.3s ease';
+                soundText.style.fontSize = '14px';
+                soundText.style.fontWeight = 'bold';
+                
+                const soundIcon = soundBtn.querySelector('.material-symbols-outlined');
+                soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                soundIcon.style.fontSize = '16px';
+                soundIcon.style.transition = 'color 0.3s ease';
+                
+                // 鼠标悬停效果
+                soundBtn.addEventListener('mouseenter', function() {
+                    soundBtn.style.backgroundColor = 'white';
+                    soundBtn.style.borderColor = '#d9434e';
+                    soundText.style.color = '#d9434e';
+                    soundIcon.style.color = '#d9434e';
+                });
+                
+                soundBtn.addEventListener('mouseleave', function() {
+                    soundBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    soundBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                    soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                    soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                });
+                
+                // 触摸事件效果（手机端）
+                soundBtn.addEventListener('touchstart', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    soundBtn.style.backgroundColor = 'white';
+                    soundBtn.style.borderColor = '#d9434e';
+                    soundText.style.color = '#d9434e';
+                    soundIcon.style.color = '#d9434e';
+                });
+                
+                soundBtn.addEventListener('touchend', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    soundBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                    soundBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                    soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                    soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                });
+                
+                // 点击播放声音
+                soundBtn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 阻止事件冒泡
+                    // 这里可以添加播放声音的逻辑
+                    console.log('Play sound:', document.getElementById('mText').innerText);
+                });
+                
+                // 添加按钮到容器
+                fullscreenContainer.appendChild(fullscreenBtn);
+                fullscreenContainer.appendChild(soundBtn);
+                
+                // 添加导航功能
+                
+                // 鼠标点击导航
+                fullscreenImg.addEventListener('click', function() {
+                    next();
+                    updateFullscreenContent();
+                });
+                
+                // 键盘导航
+                function handleFullscreenKeyboard(e) {
+                    // 阻止默认行为，防止页面滚动
+                    e.preventDefault();
+                    
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                        case 'ArrowUp':
+                            prev();
+                            updateFullscreenContent();
+                            break;
+                        case 'ArrowRight':
+                        case 'ArrowDown':
+                            next();
+                            updateFullscreenContent();
+                            break;
+                    }
+                }
+                
+                document.addEventListener('keydown', handleFullscreenKeyboard);
+                
+                // 触摸滑动导航
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                function handleFullscreenTouchStart(e) {
+                    // 检查触摸事件是否来自全屏按钮
+                    if (e.target.closest('button')) {
+                        return; // 如果是按钮，不记录触摸位置
+                    }
+                    
+                    touchStartX = e.changedTouches[0].screenX;
+                }
+                
+                function handleFullscreenTouchEnd(e) {
+                    // 检查触摸事件是否来自全屏按钮
+                    if (e.target.closest('button')) {
+                        return; // 如果是按钮，不执行导航
+                    }
+                    
+                    touchEndX = e.changedTouches[0].screenX;
+                    if (touchEndX < touchStartX - 50) {
+                        // 向左滑动
+                        next();
+                        updateFullscreenContent();
+                    }
+                    if (touchEndX > touchStartX + 50) {
+                        // 向右滑动
+                        prev();
+                        updateFullscreenContent();
+                    }
+                }
+                
+                // 更新全屏内容
+                function updateFullscreenContent() {
+                    const p = pages[cur];
+                    fullscreenImg.src = p.img;
+                    fullscreenImg.style.border = '4px solid #d9434e';
+                    fullscreenImg.style.boxSizing = 'border-box';
+                    soundBtn.innerHTML = '<span>' + p.min + '</span><span class="material-symbols-outlined ml-1">volume_up</span>';
+                    
+                    // 更新声音按钮的文字和图标样式
+                    const soundText = soundBtn.querySelector('span:first-child');
+                    soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                    soundText.style.transition = 'color 0.3s ease';
+                    soundText.style.fontSize = '14px';
+                    soundText.style.fontWeight = 'bold';
+                    
+                    const soundIcon = soundBtn.querySelector('.material-symbols-outlined');
+                    soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                    soundIcon.style.fontSize = '16px';
+                    soundIcon.style.transition = 'color 0.3s ease';
+                    
+                    // 重新添加鼠标悬停效果
+                    soundBtn.addEventListener('mouseenter', function() {
+                        soundBtn.style.backgroundColor = 'white';
+                        soundBtn.style.borderColor = '#d9434e';
+                        soundText.style.color = '#d9434e';
+                        soundIcon.style.color = '#d9434e';
+                    });
+                    
+                    soundBtn.addEventListener('mouseleave', function() {
+                        soundBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                        soundBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                        soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                        soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                    });
+                    
+                    // 重新添加触摸事件效果（手机端）
+                    soundBtn.addEventListener('touchstart', function(e) {
+                        e.stopPropagation(); // 阻止事件冒泡
+                        soundBtn.style.backgroundColor = 'white';
+                        soundBtn.style.borderColor = '#d9434e';
+                        soundText.style.color = '#d9434e';
+                        soundIcon.style.color = '#d9434e';
+                    });
+                    
+                    soundBtn.addEventListener('touchend', function(e) {
+                        e.stopPropagation(); // 阻止事件冒泡
+                        soundBtn.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                        soundBtn.style.borderColor = 'rgba(217, 67, 78, 0.2)';
+                        soundText.style.color = 'rgba(217, 67, 78, 0.5)';
+                        soundIcon.style.color = 'rgba(217, 67, 78, 0.5)';
+                    });
+                    
+                    // 重新添加点击播放声音事件
+                    soundBtn.addEventListener('click', function(e) {
+                        e.stopPropagation(); // 阻止事件冒泡
+                        console.log('Play sound:', p.min);
+                    });
+                }
+                
+                fullscreenContainer.addEventListener('touchstart', handleFullscreenTouchStart, false);
+                fullscreenContainer.addEventListener('touchend', handleFullscreenTouchEnd, false);
+                
+                // 添加到文档
+                document.body.appendChild(fullscreenContainer);
+                
+                // 请求全屏
+                if (fullscreenContainer.requestFullscreen) {
+                    fullscreenContainer.requestFullscreen();
+                } else if (fullscreenContainer.webkitRequestFullscreen) {
+                    fullscreenContainer.webkitRequestFullscreen();
+                } else if (fullscreenContainer.msRequestFullscreen) {
+                    fullscreenContainer.msRequestFullscreen();
+                }
+                
+                // 监听全屏退出事件
+                document.addEventListener('fullscreenchange', handleFullscreenExit);
+                document.addEventListener('webkitfullscreenchange', handleFullscreenExit);
+                document.addEventListener('msfullscreenchange', handleFullscreenExit);
+                
+                function handleFullscreenExit() {
+                    if (!document.fullscreenElement) {
+                        const container = document.getElementById('fullscreen-container');
+                        if (container) {
+                            container.remove();
+                        }
+                        // 移除事件监听器
+                        document.removeEventListener('fullscreenchange', handleFullscreenExit);
+                        document.removeEventListener('webkitfullscreenchange', handleFullscreenExit);
+                        document.removeEventListener('msfullscreenchange', handleFullscreenExit);
+                        document.removeEventListener('keydown', handleFullscreenKeyboard);
+                    }
+                }
+            } else {
+                // 退出全屏
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+        
+        // 键盘导航
+        function handleKeyboard(e) {
+            switch (e.key) {
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    prev();
+                    break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    next();
+                    break;
+            }
+        }
+        
+        function update() {
+            const p = pages[cur];
+            document.getElementById('pImg').src = p.img;
+            document.getElementById('mText').innerText = p.min;
+            document.getElementById('page-counter').innerText = cur + 1;
+            
+            // 控制上一页按钮状态
+            const prevBtn = document.getElementById('prevBtn');
+            if (cur === 0) {
+                prevBtn.disabled = true;
+            } else {
+                prevBtn.disabled = false;
+            }
+        }
+        
+        function next() {
+            if (cur < pages.length - 1) {
+                cur++;
+                update();
+            } else {
+                showStoryCompleteModal();
+            }
+        }
+        
+        function prev() {
+            if (cur > 0) {
+                cur--;
+                update();
+            }
+        }
+        
+        // 背景音乐元素
+        let bgMusic;
+        
+        function enterWorld() {
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('worldEntry').classList.remove('hidden');
+            
+            // 重置音乐状态为播放
+            isMusicPlaying = true;
+            
+            // 更新音乐按钮图标
+            const musicBtn = document.getElementById('musicBtn');
+            const storyMusicBtn = document.getElementById('storyMusicBtn');
+            const worldMusicBtn = document.getElementById('worldMusicBtn');
+            const quizMusicBtn = document.getElementById('quizMusicBtn');
+            const musicIcon = musicBtn ? musicBtn.querySelector('.material-symbols-outlined') : null;
+            const storyMusicIcon = storyMusicBtn ? storyMusicBtn.querySelector('.material-symbols-outlined') : null;
+            const worldMusicIcon = worldMusicBtn ? worldMusicBtn.querySelector('.material-symbols-outlined') : null;
+            const quizMusicIcon = quizMusicBtn ? quizMusicBtn.querySelector('.material-symbols-outlined') : null;
+            
+            if (musicIcon) musicIcon.textContent = 'volume_up';
+            if (storyMusicIcon) storyMusicIcon.textContent = 'volume_up';
+            if (worldMusicIcon) worldMusicIcon.textContent = 'volume_up';
+            if (quizMusicIcon) quizMusicIcon.textContent = 'volume_up';
+            
+            // 初始化背景音乐
+            if (!bgMusic) {
+                bgMusic = new Audio('static/lunar-chinese-new-year-467786.mp3');
+                bgMusic.loop = true;
+                bgMusic.volume = 0.5;
+                bgMusic.play().catch(e => {
+                    console.log('音乐播放失败:', e);
+                });
+            } else if (bgMusic.paused) {
+                bgMusic.play().catch(e => {
+                    console.log('音乐播放失败:', e);
+                });
+            }
+        }
+        
+        // 从烟花页面进入趣味世界主页面
+        function openWorldMain() {
+            document.getElementById('worldEntry').classList.add('hidden');
+            document.getElementById('activityModal').classList.remove('hidden');
+        }
+        
+        // 关闭活动介绍弹窗
+        function closeModal() {
+            document.getElementById('activityModal').classList.add('hidden');
+            document.getElementById('worldMain').classList.remove('hidden');
+        }
+        
+        // 显示故事完成弹窗
+        function showStoryCompleteModal() {
+            const modal = document.getElementById('storyCompleteModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+        
+        // 隐藏故事完成弹窗
+        function hideStoryCompleteModal() {
+            const modal = document.getElementById('storyCompleteModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+        
+        // 重新开始故事
+        function restartStory() {
+            hideStoryCompleteModal();
+            cur = 0;
+            update();
+        }
+        
+        // 添加音乐控制功能
+        let isMusicPlaying = true;
+        function toggleMusic() {
+            isMusicPlaying = !isMusicPlaying;
+            const musicBtn = document.getElementById('musicBtn');
+            const storyMusicBtn = document.getElementById('storyMusicBtn');
+            const worldMusicBtn = document.getElementById('worldMusicBtn');
+            const quizMusicBtn = document.getElementById('quizMusicBtn');
+            const musicIcon = musicBtn ? musicBtn.querySelector('.material-symbols-outlined') : null;
+            const storyMusicIcon = storyMusicBtn ? storyMusicBtn.querySelector('.material-symbols-outlined') : null;
+            const worldMusicIcon = worldMusicBtn ? worldMusicBtn.querySelector('.material-symbols-outlined') : null;
+            const quizMusicIcon = quizMusicBtn ? quizMusicBtn.querySelector('.material-symbols-outlined') : null;
+            
+            if (isMusicPlaying) {
+                // 播放音乐
+                if (musicIcon) musicIcon.textContent = 'volume_up';
+                if (storyMusicIcon) storyMusicIcon.textContent = 'volume_up';
+                if (worldMusicIcon) worldMusicIcon.textContent = 'volume_up';
+                if (quizMusicIcon) quizMusicIcon.textContent = 'volume_up';
+                if (bgMusic && bgMusic.paused) {
+                    bgMusic.play().catch(e => {
+                        console.log('音乐播放失败:', e);
+                    });
+                }
+            } else {
+                // 暂停音乐
+                if (musicIcon) musicIcon.textContent = 'volume_off';
+                if (storyMusicIcon) storyMusicIcon.textContent = 'volume_off';
+                if (worldMusicIcon) worldMusicIcon.textContent = 'volume_off';
+                if (quizMusicIcon) quizMusicIcon.textContent = 'volume_off';
+                if (bgMusic && !bgMusic.paused) {
+                    bgMusic.pause();
+                }
+            }
+        }
+        
+        // 添加趣味世界页面返回按钮事件
+        document.addEventListener('DOMContentLoaded', function() {
+            // 音乐按钮点击事件
+            const musicBtn = document.getElementById('musicBtn');
+            const storyMusicBtn = document.getElementById('storyMusicBtn');
+            const worldMusicBtn = document.getElementById('worldMusicBtn');
+            const quizMusicBtn = document.getElementById('quizMusicBtn');
+            if (musicBtn) {
+                musicBtn.addEventListener('click', toggleMusic);
+            }
+            if (storyMusicBtn) {
+                storyMusicBtn.addEventListener('click', toggleMusic);
+            }
+            if (worldMusicBtn) {
+                worldMusicBtn.addEventListener('click', toggleMusic);
+            }
+            if (quizMusicBtn) {
+                quizMusicBtn.addEventListener('click', toggleMusic);
+            }
+            
+            // 趣味世界页面返回按钮点击事件
+            const worldBackBtn = document.getElementById('worldBackBtn');
+            if (worldBackBtn) {
+                worldBackBtn.addEventListener('click', function() {
+                    document.getElementById('worldEntry').classList.add('hidden');
+                    document.getElementById('loader').classList.remove('hidden');
+                    
+                    // 停止背景音乐
+                    if (bgMusic) {
+                        bgMusic.pause();
+                        bgMusic.currentTime = 0;
+                    }
+                    
+                    // 更新音乐状态和图标
+                    isMusicPlaying = false;
+                    const musicBtn = document.getElementById('musicBtn');
+                    const storyMusicBtn = document.getElementById('storyMusicBtn');
+                    const worldMusicBtn = document.getElementById('worldMusicBtn');
+                    const quizMusicBtn = document.getElementById('quizMusicBtn');
+                    const musicIcon = musicBtn ? musicBtn.querySelector('.material-symbols-outlined') : null;
+                    const storyMusicIcon = storyMusicBtn ? storyMusicBtn.querySelector('.material-symbols-outlined') : null;
+                    const worldMusicIcon = worldMusicBtn ? worldMusicBtn.querySelector('.material-symbols-outlined') : null;
+                    const quizMusicIcon = quizMusicBtn ? quizMusicBtn.querySelector('.material-symbols-outlined') : null;
+                    
+                    if (musicIcon) musicIcon.textContent = 'volume_off';
+                    if (storyMusicIcon) storyMusicIcon.textContent = 'volume_off';
+                    if (worldMusicIcon) worldMusicIcon.textContent = 'volume_off';
+                    if (quizMusicIcon) quizMusicIcon.textContent = 'volume_off';
+                });
+            }
+            
+            // 趣味世界主页面返回按钮点击事件
+            const worldMainBackBtn = document.getElementById('worldMainBackBtn');
+            if (worldMainBackBtn) {
+                worldMainBackBtn.addEventListener('click', function() {
+                    document.getElementById('worldMain').classList.add('hidden');
+                    document.getElementById('worldEntry').classList.remove('hidden');
+                });
+            }
+            
+            // Quiz页面返回按钮点击事件
+            const quizBackBtn = document.getElementById('quizBackBtn');
+            if (quizBackBtn) {
+                quizBackBtn.addEventListener('click', function() {
+                    document.getElementById('quizPage').classList.add('hidden');
+                    document.getElementById('worldMain').classList.remove('hidden');
+                });
+            }
+            
+            // Quiz完成页面返回按钮点击事件
+            const quizCompleteBackBtn = document.getElementById('quizCompleteBackBtn');
+            if (quizCompleteBackBtn) {
+                quizCompleteBackBtn.addEventListener('click', function() {
+                    document.getElementById('quizPage').classList.add('hidden');
+                    document.getElementById('worldMain').classList.remove('hidden');
+                });
+            }
+            
+            // 活动介绍弹窗关闭按钮点击事件
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', closeModal);
+            }
+            
+            // 故事完成弹窗按钮事件
+            const storyCompleteRestartBtn = document.getElementById('storyCompleteRestartBtn');
+            if (storyCompleteRestartBtn) {
+                storyCompleteRestartBtn.addEventListener('click', function() {
+                    restartStory();
+                    document.getElementById('story').classList.remove('hidden');
+                    document.getElementById('storyCompleteModal').classList.add('hidden');
+                });
+            }
+            
+            const storyCompleteCloseBtn = document.getElementById('storyCompleteCloseBtn');
+            if (storyCompleteCloseBtn) {
+                storyCompleteCloseBtn.addEventListener('click', function() {
+                    document.getElementById('storyCompleteModal').classList.add('hidden');
+                    document.getElementById('story').classList.add('hidden');
+                    document.getElementById('worldMain').classList.remove('hidden');
+                });
+            }
+            
+            // 点击背景关闭故事完成弹窗
+            const storyCompleteOverlay = document.getElementById('storyCompleteOverlay');
+            if (storyCompleteOverlay) {
+                storyCompleteOverlay.addEventListener('click', function() {
+                    document.getElementById('storyCompleteModal').classList.add('hidden');
+                    document.getElementById('story').classList.add('hidden');
+                    document.getElementById('worldMain').classList.remove('hidden');
+                });
+            }
+        });
+        
+        // Quiz functionality
+        const quizQuestions = [
+            {
+                question: "闽南语中，春节快乐怎么说？",
+                options: ["A. 新年快乐", "B. 春节快乐", "C. 新春快乐"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，红包怎么说？",
+                options: ["A. 红包", "B. 利是", "C. 压岁钱"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，年糕怎么说？",
+                options: ["A. 年糕", "B. 甜粿", "C. 糍粑"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，团圆饭怎么说？",
+                options: ["A. 团圆饭", "B. 年夜饭", "C. 合家欢"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，拜年怎么说？",
+                options: ["A. 拜年", "B. 贺年", "C. 问好"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，烟花怎么说？",
+                options: ["A. 烟花", "B. 炮仗", "C. 花火"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，饺子怎么说？",
+                options: ["A. 饺子", "B. 扁食", "C. 馄饨"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，灯笼怎么说？",
+                options: ["A. 灯笼", "B. 灯仔", "C. 花灯"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，春联怎么说？",
+                options: ["A. 春联", "B. 对联", "C. 门联"],
+                answer: "B"
+            },
+            {
+                question: "闽南语中，守岁怎么说？",
+                options: ["A. 守岁", "B. 过年", "C. 跨年"],
+                answer: "B"
+            }
+        ];
+        
+        let currentQuestion = 0;
+        let score = 0;
+        
+        function openQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('worldMain').classList.add('hidden');
+            document.getElementById('quizPage').classList.remove('hidden');
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            const quizContent = document.getElementById('quizContent');
+            const quizResult = document.getElementById('quizResult');
+            const quizComplete = document.getElementById('quizComplete');
+            
+            // 检查元素是否存在
+            if (!quizContent || !quizResult || !quizComplete) {
+                console.error('Quiz elements not found');
+                return;
+            }
+            
+            // 隐藏结果和完成界面
+            quizResult.classList.add('hidden');
+            quizComplete.classList.add('hidden');
+            
+            // 显示问题
+            quizContent.classList.remove('hidden');
+            
+            // 检查当前问题是否存在
+            if (currentQuestion >= quizQuestions.length) {
+                quizContent.innerHTML = '<div class="mb-4"><p class="text-lg mb-6">没有更多问题了！</p></div>';
+                return;
+            }
+            
+            const question = quizQuestions[currentQuestion];
+            // 检查问题是否有效
+            if (!question || !question.question || !question.options || !question.answer) {
+                quizContent.innerHTML = '<div class="mb-4"><p class="text-lg mb-6">问题数据无效！</p></div>';
+                return;
+            }
+            
+            quizContent.innerHTML = `
+                <div class="mb-4">
+                    <h3 class="text-xl font-bold mb-4">问题 ${currentQuestion + 1}/${quizQuestions.length}</h3>
+                    <p class="text-lg mb-6">${question.question}</p>
+                    <div class="space-y-3">
+                        ${question.options.map((option, index) => `
+                            <button class="quiz-option w-full text-left p-3 border-2 border-gray-300 rounded-lg hover:bg-gray-100 transition-all duration-300" data-option="${String.fromCharCode(65 + index)}">
+                                ${option}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // 添加选项点击事件
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedOption = this.getAttribute('data-option');
+                    checkAnswer(selectedOption);
+                });
+            });
+        }
+        
+        function checkAnswer(selectedOption) {
+            const question = quizQuestions[currentQuestion];
+            const isCorrect = selectedOption === question.answer;
+            
+            if (isCorrect) {
+                score++;
+            }
+            
+            // 显示结果
+            const quizContent = document.getElementById('quizContent');
+            const quizResult = document.getElementById('quizResult');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultMessage = document.getElementById('resultMessage');
+            
+            quizContent.classList.add('hidden');
+            quizResult.classList.remove('hidden');
+            
+            if (isCorrect) {
+                resultTitle.textContent = '回答正确！';
+                resultTitle.style.color = '#4CAF50';
+                quizResult.style.backgroundColor = '#e8f5e8';
+                resultMessage.textContent = `正确答案是：${question.answer}选项`;
+            } else {
+                resultTitle.textContent = '回答错误！';
+                resultTitle.style.color = '#f44336';
+                quizResult.style.backgroundColor = '#ffe8e8';
+                resultMessage.textContent = `正确答案是：${question.answer}选项`;
+            }
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizQuestions.length) {
+                loadQuestion();
+            } else {
+                showQuizComplete();
+            }
+        }
+        
+        function showQuizComplete() {
+            const quizResult = document.getElementById('quizResult');
+            const quizComplete = document.getElementById('quizComplete');
+            const finalScore = document.getElementById('finalScore');
+            
+            quizResult.classList.add('hidden');
+            quizComplete.classList.remove('hidden');
+            
+            finalScore.textContent = `你的得分：${score}/${quizQuestions.length}`;
+        }
+        
+        function closeQuiz() {
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('worldMain').classList.remove('hidden');
+        }
+        
+        // 添加事件监听器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 答题页面返回按钮
+            const quizBackBtn = document.getElementById('quizBackBtn');
+            const quizCompleteBackBtn = document.getElementById('quizCompleteBackBtn');
+            const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+            
+            if (quizBackBtn) {
+                quizBackBtn.addEventListener('click', closeQuiz);
+            }
+            if (quizCompleteBackBtn) {
+                quizCompleteBackBtn.addEventListener('click', closeQuiz);
+            }
+            if (nextQuestionBtn) {
+                nextQuestionBtn.addEventListener('click', nextQuestion);
+            }
+            
+            // 答题页面音乐按钮
+            const quizMusicBtn = document.getElementById('quizMusicBtn');
+            if (quizMusicBtn) {
+                quizMusicBtn.addEventListener('click', toggleMusic);
+            }
+        });
+    </script>
+</body>
+</html>
